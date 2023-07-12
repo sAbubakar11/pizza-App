@@ -3,6 +3,7 @@ import logo from "../assets/pizzaLogo.png";
 import { Link } from "react-router-dom";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import "../Styles/Navbar.css";
+import cartLogo from "../assets/cartLogo.Png";
 
 function Navbar() {
   const [openLink, setOpenLink] = useState(false);
@@ -19,7 +20,7 @@ function Navbar() {
           <Link to="/menu"> Menu</Link>
           <Link to="/about"> About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart"> Cart</Link>
         </div>
       </div>
       <div className="rightSide">
@@ -27,7 +28,11 @@ function Navbar() {
         <Link to="/menu"> Menu</Link>
         <Link to="/about"> About</Link>
         <Link to="/contact">Contact</Link>
-        <Link to="/cart">Cart</Link>
+        <Link to="/cart">
+          {" "}
+          <img src={cartLogo} alt="" style={{ height: "5vh" }} />
+          Cart
+        </Link>
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>

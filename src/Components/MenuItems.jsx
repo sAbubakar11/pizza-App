@@ -1,32 +1,29 @@
-import { DisabledByDefault, Padding } from "@mui/icons-material";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
 
 function MenuItems({ image, name, price, menuItem, onAddToCart }) {
   const [cartItem, setCartItem] = useState(false);
-  const [enterCounter, setEnterCounter] = useState(1);
-
-  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
 
   const addButtonHandle = () => {
     setCartItem(true);
   };
 
   const incrementHandle = () => {
-    setEnterCounter(enterCounter + 1);
+    setQuantity(quantity + 1);
   };
 
-  const decrimentHandler = () => {
-    if (enterCounter <= 1) {
-      return DisabledByDefault;
+  const decrementHandle = () => {
+    if (quantity <= 1) {
+      return;
     } else {
-      setEnterCounter(enterCounter - 1);
+      setQuantity(quantity - 1);
     }
   };
 
   const addToCartHandle = () => {
-    onAddToCart({ ...menuItem, qauntity: enterCounter });
+    const updatedMenuItem = { ...menuItem, quantity: quantity };
+    onAddToCart(updatedMenuItem);
     setCartItem(false);
   };
 
@@ -38,15 +35,16 @@ function MenuItems({ image, name, price, menuItem, onAddToCart }) {
         ${price}
         {cartItem ? (
           <>
+            <Button onClick={decrementHandle}>-</Button>
+            {quantity}
+
             <Button
               onClick={incrementHandle}
               variant="primary"
-              style={{ marginLeft: "2rem", Padding: "3px" }}
+              style={{ marginLeft: "2rem" }}
             >
               +
             </Button>
-            {enterCounter}
-            <Button onClick={decrimentHandler}>-</Button>
             <Button
               onClick={addToCartHandle}
               variant="primary"
@@ -59,9 +57,9 @@ function MenuItems({ image, name, price, menuItem, onAddToCart }) {
           <Button
             variant="primary"
             style={{ marginLeft: "6rem" }}
-            onClick={() => addButtonHandle(menuItem)}
+            onClick={addButtonHandle}
           >
-            Add TO Cart
+            Add to Cart
           </Button>
         )}
       </p>
