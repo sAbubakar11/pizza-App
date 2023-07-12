@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: [],
 };
-
 const cartSlice = createSlice({
   name: " cart",
   initialState,
@@ -15,7 +14,7 @@ const cartSlice = createSlice({
       if (!existingCartItem) {
         state.cartItems.push(action.payload);
       } else {
-        existingCartItem.qauntity += action.payload.qauntity;
+        existingCartItem.quantity += action.payload.quantity;
       }
       // const newItem = state.cartItems.map((cartItem) => {
       //   if (cartItem.id === action.payload.id) {
